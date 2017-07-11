@@ -1,0 +1,103 @@
+<apex:page showHeader="true" sidebar="false" Controller="taxwareConfigController" docType="html-5.0" cache="false">
+
+    <apex:composition template="FrameworkSidebarTemplateClone1">
+    
+        <apex:define name="first">
+            <script type="text/javascript">
+                function savefunc(){
+                    callsave();
+                }
+            </script>
+        </apex:define>
+        <apex:define name="styles">
+        </apex:define>
+        
+        <apex:define name="top">
+           <apex:outputText value="Taxware Configuration" style="font-weight:bold"/>
+        </apex:define>
+        
+        <apex:define name="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <Framework:messages />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <apex:form id="form" acceptcharset="utf-8" prependId="true" html-role="form">
+                <apex:actionFunction name="callsave" action="{!Save}" />
+                    <div class="row">
+                        <div class="col-xs-12">
+                        
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                            
+                                <!-- General Tab Panel -->
+                                <div role="tabpanel" class="tab-pane active " id="general">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="section-heading">
+                                                <apex:outputText value="Taxware Authentication Information" style="font-weight:bold"/>
+                                            </div>
+                                        <div class="form-horizontal">
+                                        
+                                            <!-- End Point -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3 required-icon true">End-Point</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!txConfig.Endpoint__c}" styleClass="form-control"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Username -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">Username</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputField value="{!txConfig.Username__c}" styleClass="form-control"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Password -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">Password</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!txConfig.Password__c}" styleClass="form-control" />
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Secret Key -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">Secret Key</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!txConfig.Secret_Key__c}" styleClass="form-control" />
+                                                </div>
+                                            </div>
+                                       
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                 
+                </apex:form>
+            
+            </div>
+        
+        </apex:define>
+        
+        <apex:define name="action">
+          <div class="text-center">
+            <a href="#" id="save" onclick="savefunc();" class="btn btn-primary btn-lg">Save</a>
+          </div>
+        </apex:define>
+    
+    </apex:composition>
+    
+</apex:page>

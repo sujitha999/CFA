@@ -1,0 +1,94 @@
+<apex:page controller="AttendeeEnhancedListController" sidebar="false" id="thepage">
+<apex:pageMessages id="showmsg"/>
+    <apex:form id="theform">
+    
+    <script type="text/javascript">
+      function selectAllCheckboxes(obj,receivedInputID){
+            var inputCheckBox = document.getElementsByTagName("input");
+            for(var i=0; i<inputCheckBox.length; i++){
+                if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){
+                    inputCheckBox[i].checked = obj.checked;
+                }
+            }
+        }
+      
+    var syncselected = function(value1, Recordid)
+    {
+    
+    //console.log(value1);
+    //console.log(Recordid);
+    sync(value1, Recordid);
+    }
+    </script>
+   
+      <apex:actionFunction name="sync" action="{!sync}" rerender="pb01" status="status">
+        <apex:param name="field" assignTo="{!fieldToUpdate}" value="" />
+        <apex:param name="value" assignTo="{!selectedId}" value="" />
+      </apex:actionFunction>
+        <apex:pageblock id="pb01" title="Attendees" >
+        <apex:actionStatus id="status" startText="Applying values..."/>
+            <apex:pageBlockButtons id="pbbt01" location="both">
+                <apex:commandButton value="Save Selected Records" action="{!save}" rendered="{!listEAW.size != null}" />
+                <apex:commandButton value="Back to Event" action="{!back}" rendered="{!listEAW.size != null}" />
+            </apex:pageBlockButtons>           
+            <apex:outputPanel id="OP01" rendered="{!listEAW.size != null}">
+            
+            <!-- Table-->
+            
+            <apex:pageBlockTable value="{!listEAW}" var="lR" id="thetable" >
+            <apex:column >
+                <apex:facet name="header">
+                     <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')" />
+                </apex:facet>
+                     <apex:inputCheckbox value="{!lR.isSelected}" id="inputId" />
+                    </apex:column>
+           <!-- <apex:column headerValue="Select" style="width:3%">
+                <apex:inputcheckbox value="{!lR.isSelected}" />                    
+            </apex:column>-->
+            <apex:column headerValue="Business Group">  
+                
+                    <apex:outputField value="{!lR.ea.BusinessGroupName__c}">
+                    <apex:inlineEditSupport showOnEdit="saveButton" event="ondblclick"/>
+                    </apex:outputField>
+            </apex:column>
+            <apex:column headerValue="Attendee ID">  
+                
+                    <apex:outputField value="{!lR.ea.Name}">
+                    <apex:inlineEditSupport showOnEdit="saveButton" event="ondblclick"/>
+                    </apex:outputField>
+            </apex:column>
+            <apex:column headerValue="Full Name">  
+              
+                    <apex:outputField value="{!lR.ea.EventApi__Full_Name__c}">
+                    <apex:inlineEditSupport showOnEdit="saveButton" event="ondblclick"/>
+                    </apex:outputField>
+            </apex:column>
+            <apex:column headerValue="Contact">  
+                
+                    <apex:outputField value="{!lR.ea.EventApi__Contact__c}">
+                    <apex:inlineEditSupport showOnEdit="saveButton, alert('***');" event="ondblclick"/>
+                    </apex:outputField>
+            </apex:column>
+            <apex:column headerValue="Education Credit Earned">  
+               
+                    <apex:inputField value="{!lR.ea.EducationCreditEarned__c}" onchange="syncselected('EducationCreditEarned', '{!lR.ea.Id}')"/>
+                    <!-- <apex:inlineEditSupport showOnEdit="saveButton" event="ondblclick"/>
+                    </apex:outputField> -->
+            </apex:column>
+            <apex:column headerValue="Status">  
+                
+                    <apex:inputField value="{!lR.ea.EventApi__Status__c}" onchange="syncselected('Status', '{!lR.ea.Id}')"/>
+                    <!-- <apex:inlineEditSupport showOnEdit="saveButton" event="ondblclick"/>
+                    </apex:outputField> -->
+            </apex:column>
+            <apex:column headerValue="Ticket Type">  
+              
+                    <apex:outputField value="{!lR.ea.EventApi__Ticket_Type__c}">
+                    <apex:inlineEditSupport showOnEdit="saveButton" event="ondblclick"/>
+                    </apex:outputField>
+            </apex:column>                 
+                </apex:pageBlockTable>
+            </apex:outputPanel>
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

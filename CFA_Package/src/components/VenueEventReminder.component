@@ -1,0 +1,17 @@
+<apex:component controller="VenueEventReminderCntrl" access="global">
+  <apex:attribute name="recId" type="Id" description="Id of the parent event" assignTo="{!attendeeId}"/>
+  <html lang="en">
+  <body bgcolor="#FFF">
+      <table cellpadding="0" border="0" style="font-size: 14px; font-family: 'Arial'; color: #333;">
+          <apex:repeat value="{!venues}" var="v">
+              <tr>
+                  <td>{!v.Name}</td>
+              </tr>
+              <tr>
+                  <td>{!v.EventApi__Street__c}, <br/>{!v.EventApi__City__c}, {!v.EventApi__State__c}, {!v.EventApi__Country__c}, {!v.EventApi__Postal_Code__c}</td>
+              </tr>
+          </apex:repeat>
+      </table>
+  </body>
+  </html>    
+</apex:component>

@@ -1,0 +1,25 @@
+<apex:component Controller="addPaymentTerm">
+<apex:attribute type="String" name="Pid" assignTo="{!Parentid}" description="Value to pass into the controller"/>
+<apex:attribute type="Onboarding_Payment_Terms__c[]" name="lstChild" assignTo="{!listPaymentTerm}" description=""/>
+    <!-- <apex:form id="form2"> -->
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!listPaymentTerm}" var="pt">
+                <apex:column headerValue="{!$Label.Society_Onboarding_PayTerm_H1}">
+                    <apex:inputField value="{!pt.Name}"/>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Society_Onboarding_PayTerm_H2}">
+                    <apex:inputField value="{!pt.Display_Name__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Society_Onboarding_PayTerm_H3}">
+                    <apex:inputField value="{!pt.Display_Message__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Society_Onboarding_PayTerm_H4}">
+                    <apex:inputField value="{!pt.Variable__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="{!$Label.Society_Onboarding_PayTerm_AddButton}" action="{!addPayments}" rerender="component2"  styleClass="btn btn-primary btn-lg"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    <!-- </apex:form> -->
+</apex:component>

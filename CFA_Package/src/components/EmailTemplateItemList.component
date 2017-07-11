@@ -1,0 +1,54 @@
+<apex:component controller="emailTemplateItemList" access="global">
+    
+    <apex:attribute name="recId" type="string" description="Id of the parent receipt" assignTo="{!receiptId}"/>
+    <html lang="en">
+    <body>
+        <table cellpadding="5" style="border-collapse: collapse" width="100%">
+                <tr>
+                    <td style="background-color: #a7a8aa; color: #000000">
+                        <b>Item Purchased</b>
+                    </td>
+                    <td style="background-color: #a7a8aa; color: #000000">
+                        <b>Price</b>
+                    </td>
+                    <td style="background-color: #a7a8aa; color: #000000">
+                        <b>Quantity</b>
+                    </td>
+                </tr>
+                <apex:repeat value="{!Items}" var="it">
+                        <!-- non invoce Section -->
+                        <apex:outputPanel rendered="{!IF(it.isInvoice == false,true,false)}">
+                            <tr>
+                                <td>
+                                    {!it.receiptLine.OrderApi__Item__r.Name}
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0, number, ###,###,###,##0.00}"><apex:param value="{!it.receiptLine.OrderApi__Sale_Price__c}"/></apex:outputText>
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0, number, ###,###,###,##0}"><apex:param value="{!it.receiptLine.OrderApi__Quantity__c}"/></apex:outputText>
+                                </td>                                                           
+                            </tr>
+                        </apex:outputPanel>
+                        
+                        <!-- invoce Section -->
+                        <apex:outputPanel rendered="{!IF(it.isInvoice == true,true,false)}">
+                             <tr>
+                                <td>
+                                    {!it.invoiceLines.OrderApi__Item__r.Name}
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0, number, ###,###,###,##0.00}"><apex:param value="{!it.invoiceLines.OrderApi__Sale_Price__c}"/></apex:outputText>
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0, number, ###,###,###,##0}"><apex:param value="{!it.invoiceLines.OrderApi__Quantity__c}"/></apex:outputText>
+                                </td>                                                           
+                            </tr>
+                        </apex:outputPanel>
+                </apex:repeat>
+            </table>
+    </body>
+    </html>
+        
+
+</apex:component>

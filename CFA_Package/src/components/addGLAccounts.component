@@ -1,0 +1,25 @@
+<apex:component Controller="addMultipleGLAccounts">
+<apex:attribute type="String" name="Pid" assignTo="{!Parentid}" description="Value to pass into the controller"/>
+<apex:attribute type="Onboarding_GL_Accounts__c[]" name="lstChild" assignTo="{!listglAcc}" description=""/>
+    <!-- <apex:form id="form2"> -->
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!listglAcc}" var="gl">
+                <apex:column headerValue="{!$Label.Society_Onboarding_GLAcc_H1}">
+                    <apex:inputField value="{!gl.Name}"/>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Society_Onboarding_GLAcc_H2}">
+                    <apex:inputField value="{!gl.Report_Category__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Society_Onboarding_GLAcc_H3}">
+                    <apex:inputField value="{!gl.Detail__c}"/>
+                </apex:column>           
+                <apex:column headerValue="{!$Label.Society_Onboarding_GLAcc_H4}">
+                    <apex:inputField value="{!gl.Type__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="{!$Label.Society_Onboarding_GLAcc_AddButton}" action="{!addAccount}" rerender="component1" styleClass="btn btn-primary btn-lg"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    <!-- </apex:form> -->
+</apex:component>

@@ -1,0 +1,223 @@
+<apex:page showHeader="true" sidebar="false" standardController="Society_Onboarding__c" extensions="SocietyOnboardingController" docType="html-5.0" cache="false">
+
+    <apex:composition template="FrameworkSidebarTemplateClone">
+    
+        <apex:define name="first">
+            <script type="text/javascript">
+                function savefunc(){
+                    callsave();
+                }
+            </script>
+        </apex:define>
+        
+        <apex:define name="styles">
+        </apex:define>
+        
+        <apex:define name="top">
+           <apex:outputText value="{!$Label.cfamn__society_onboarding_title}" style="font-weight:bold"/>
+        </apex:define>
+        
+        <apex:define name="sidebar">
+            <ul id="onboarding-config-nav"  class="nav navbar-pills navbar-stacked" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#general" aria-controls="home" role="tab" data-toggle="tab">
+                        <apex:outputText value="{!$Label.cfamn__society_onboarding_general_tab}" style="font-weight:bold"/>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#contact" aria-controls="home" role="tab" data-toggle="tab">
+                        <apex:outputText value="{!$Label.cfamn__society_onboarding_contact_tab}" style="font-weight:bold"/>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#glaccounts" aria-controls="home" role="tab" data-toggle="tab">
+                        <apex:outputText value="{!$Label.cfamn__society_onboarding_gl_tab}" style="font-weight:bold"/>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#paymentterms" aria-controls="home" role="tab" data-toggle="tab">
+                        <apex:outputText value="{!$Label.cfamn__society_onboarding_payterms_tab}" style="font-weight:bold"/>
+                    </a>
+                </li>
+            </ul>
+        </apex:define>
+        
+        <apex:define name="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <Framework:messages />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <apex:form id="form" acceptcharset="utf-8" prependId="true" html-role="form">
+                <apex:actionFunction name="callsave" action="{!SaveOnly}" />
+                    <div class="row">
+                        <div class="col-xs-12">
+                        
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                            
+                                <!-- General Tab Panel -->
+                                <div role="tabpanel" class="tab-pane active " id="general">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="section-heading">
+                                                <apex:outputText value="{!$Label.cfamn__society_onboarding_general_tab}" style="font-weight:bold"/>
+                                            </div>
+                                        <div class="form-horizontal">
+                                        
+                                            <!-- Society.Name -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3 required-icon true">{!$Label.Society_Onboarding_Name}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!socOnb_obj.Name}" styleClass="form-control"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Society.CurrencyCode -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">{!$Label.Society_Onboarding_Currency}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputField value="{!socOnb_obj.CurrencyIsoCode}" styleClass="form-control"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Society.CFA Org Id -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">{!$Label.Society_Onboarding_CFAOrg_Id}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!socOnb_obj.CFA_Org_ID__c}" styleClass="form-control" maxlength="10"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Society.CFA Society Id -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">{!$Label.Society_Onboarding_Society_Id}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!socOnb_obj.CFA_Society_Id__c}" styleClass="form-control" maxlength="10"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Society.Homepage URL -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">{!$Label.Society_Onboarding_Homepage}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!socOnb_obj.Society_Homepage_URL__c}" styleClass="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Contact Tab Panel -->
+                                <div role="tabpanel" class="tab-pane " id="contact">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="section-heading">
+                                                <apex:outputText value="{!$Label.cfamn__society_onboarding_contact_tab}" style="font-weight:bold"/>
+                                            </div>
+                                        <div class="form-horizontal">
+                                        
+                                            <!-- Society.Email -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3 required-icon true">{!$Label.Society_Onboarding_Email}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!socOnb_obj.Email__c}" styleClass="form-control"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Society.Phone -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">{!$Label.Society_Onboarding_Phone}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputText value="{!socOnb_obj.Phone__c}" styleClass="form-control"/>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Society.Mailing Address -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">{!$Label.Society_Onboarding_Address}</label>
+                                                <div class="col-xs-5">
+                                                    <apex:inputTextArea value="{!socOnb_obj.Mailing_Addess__c}" styleClass="form-control" rows="4"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3">{!$Label.cfamn__society_onboarding_canadian}</label>
+                                                <div class="col-xs-1">
+                                                    <apex:inputCheckbox value="{!socOnb_obj.Canadian_Society__c}" styleClass="form-control" />
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label><b>{!$Label.Society_Onboarding_CASL_Note}</b></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- GL Accounts Tab Panel -->
+                                <div role="tabpanel" class="tab-pane " id="glaccounts">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="section-heading">
+                                                <apex:outputText value="{!$Label.cfamn__society_onboarding_gl_tab}" style="font-weight:bold"/>
+                                            </div>
+                                        <div class="form-horizontal">
+                                        
+                                            <apex:outputPanel id="component1">   
+                                                <c:addGLAccounts lstChild="{!lstglAcc}" Pid="{!socOnb_obj.id}"/>   
+                                            </apex:outputPanel> 
+                                                                             
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Payment Terms Tab Panel -->
+                                <div role="tabpanel" class="tab-pane " id="paymentterms">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="section-heading">
+                                                <apex:outputText value="{!$Label.cfamn__society_onboarding_payterms_tab}" style="font-weight:bold"/>
+                                            </div>
+                                        <div class="form-horizontal">
+                                        
+                                            <apex:outputPanel id="component2">
+                                                <c:addPaymentTerm lstChild="{!lstPaymentTerm}" Pid="{!socOnb_obj.id}" />
+                                            </apex:outputPanel>  
+                                                                             
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                 
+                </apex:form>
+            
+            </div>
+        
+        </apex:define>
+        
+        <apex:define name="action">
+          <div class="text-center">
+            <a href="{!URLFOR($Action.Society_Onboarding__c.List, $ObjectType.Society_Onboarding__c)}" class="btn btn-default btn-lg">{!$Label.Society_Onboarding_CancelButton}</a> 
+            <a href="#" id="save" onclick="savefunc();" class="btn btn-primary btn-lg">{!$Label.Society_Onboarding_SaveButton}</a>
+          </div>
+        </apex:define>
+    
+    </apex:composition>
+    
+</apex:page>

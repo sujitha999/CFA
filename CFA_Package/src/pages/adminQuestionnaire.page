@@ -1,0 +1,172 @@
+<apex:page controller="adminQuestionnaire" contentType="application/vnd.ms-excel#{!ev.Name}-Attendee Questionnaire.xls" cache="true">
+
+<apex:outputText value="{!xlsHeader}"/>
+<Workbook  xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+
+<Styles>
+    <Style ss:ID="s1">
+        <Alignment ss:Vertical="Center" ss:Horizontal="Right" ss:WrapText="1"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+        </Borders>
+        <!-- <Font ss:Bold="1" ss:Color="#FFFFFF"/> -->
+        <Interior ss:Color="#264C72" ss:Pattern="Solid" />
+        <NumberFormat/>
+        <Protection/>
+    </Style>
+    
+    <Style ss:ID="s2">
+        <Alignment ss:Vertical="Center" ss:Horizontal="Left" ss:WrapText="1"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+        </Borders>
+        <Font ss:Bold="1" ss:Color="#000000"/> 
+        <Interior ss:Color="#cccccc" ss:Pattern="Solid"/>
+        <NumberFormat/>
+        <Protection/>
+    </Style>
+    
+    <Style ss:ID="s3">
+        <Alignment ss:Vertical="Center" ss:Horizontal="Left" ss:WrapText="1"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+        </Borders>
+        <Font ss:Bold="1" ss:Color="#000000"/>
+        <Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />
+        <NumberFormat/>
+        <Protection/>
+    </Style>
+    
+    <Style ss:ID="s4">
+        <Alignment ss:Vertical="Center" ss:Horizontal="Center" ss:WrapText="1"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+        </Borders>
+        <!-- <Font ss:Bold="1" ss:Color="#FFFFFF"/> -->
+        <Interior ss:Color="#264C72" ss:Pattern="Solid" />
+        <NumberFormat/>
+        <Protection/>
+    </Style>
+    
+    <Style ss:ID="s5">
+        <Alignment ss:Vertical="Center" ss:Horizontal="Left" ss:WrapText="1"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0"/>
+            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0"/>
+        </Borders>
+        <Font ss:Bold="0" ss:Color="#000000"/>
+        <Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />
+        <NumberFormat/>
+        <Protection/>
+    </Style>
+    
+    <Style ss:ID="s6">
+        <Alignment ss:Vertical="Center" ss:Horizontal="Left" ss:WrapText="1"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0"/>
+            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0"/>
+            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="0"/>
+        </Borders>
+        <Font ss:Bold="0" ss:Color="#FF0000"/>
+        <Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />
+        <NumberFormat/>
+        <Protection/>
+    </Style>
+</Styles>
+ 
+<Worksheet ss:Name="Attendee List">
+    <Table  x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="150">
+        
+        <!--
+        <Column  ss:Width="225" />
+        <Column  ss:Width="200" />
+        <Column  ss:Width="200"/>
+        <Column  ss:Width="200"/>
+        <Column  ss:Width="200"/>
+        
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s1"><Data ss:Type="String" ><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">Activity Title:</Font></B></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s2" ss:MergeAcross="3"><Data ss:Type="String">{!ev.Name}</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:Index="6" ss:StyleID="s6" ss:MergeAcross="2"><Data ss:Type="String">* Indicates required field</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+        </Row>
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s1"><Data ss:Type="String" ><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">City:</Font></B></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s3" ss:MergeAcross="3"><Data ss:Type="String">{!ve.EventApi__City__c}</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:Index="6" ss:StyleID="s6"></Cell>
+        </Row>
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s1"><Data ss:Type="String" ><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">State/Province:</Font></B></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s2" ss:MergeAcross="3"><Data ss:Type="String">{!ve.EventApi__State__c}</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:Index="6" ss:StyleID="s6"></Cell>
+        </Row>
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s1"><Data ss:Type="String" ><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">Country:</Font></B></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s3" ss:MergeAcross="3"><Data ss:Type="String">{!ve.EventApi__Country__c}</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:Index="6" ss:StyleID="s6"></Cell>
+        </Row>
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s1"><Data ss:Type="String" ><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">CE Credits:</Font></B></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s2" ss:MergeAcross="3"><Data ss:Type="String">{!ev.CFAMN2__EducationCreditValue__c}</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:Index="6" ss:StyleID="s6"></Cell>
+        </Row>
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s1"><Data ss:Type="String" ><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">SER Credits:</Font></B></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s3" ss:MergeAcross="3"><Data ss:Type="String">{!ev.CFAMN2__SER_Credit_Value__c}</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:Index="6" ss:StyleID="s6"></Cell>
+        </Row>
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s1"><Data ss:Type="String" ><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">Provider E-mail to receive submission status updates:</Font></B></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s2" ss:MergeAcross="3"><Data ss:Type="String"></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:Index="6" ss:StyleID="s6"></Cell>
+        </Row>     
+        <Row ss:Height="25">
+            <Cell ss:StyleID="s3" ss:MergeAcross="4"></Cell>
+        </Row>
+        -->
+       <Row ss:Height="50">
+            <!--<Cell ss:StyleID="s4" ><Data ss:Type="String" ><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">Person Id</Font></B><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>  -->         
+            <Cell ss:StyleID="s4"><Data ss:Type="String" ><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">Full Name</Font></B><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <!--<Cell ss:StyleID="s4"><Data ss:Type="String" ><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">Employer</Font></B><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font></Data><NamedCell ss:Name="_FilterDatabase"/></Cell> -->
+            <apex:repeat value="{!AttendeeQuestions}" var="q">
+            <Cell ss:StyleID="s4"><Data ss:Type="String" ><B xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#FFFFFF">{!q}</Font></B><Font html:Color="#DD0806" xmlns="http://www.w3.org/TR/REC-html40">*</Font></Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            </apex:repeat>
+        </Row>
+
+        <apex:repeat value="{!AttendeeResponses}" var="a">
+        <Row>
+            <!--<Cell ss:StyleID="s5"><Data ss:Type="String"><apex:outputText style="color:#000;" value="{!a.pid}"/></Data></Cell> -->
+            <Cell ss:StyleID="s5"><Data ss:Type="String">{!a.name}</Data></Cell>
+            <!--<Cell ss:StyleID="s5"><Data ss:Type="String">{!a.emp}</Data></Cell> -->
+            <apex:repeat value="{!a.answers}" var="r">
+            <Cell ss:StyleID="s5"><Data ss:Type="String">{!r}</Data></Cell>
+            </apex:repeat>
+        </Row>
+        </apex:repeat>
+
+    </Table>
+    <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+        <Selected/>
+        <FreezePanes/>
+        <FrozenNoSplit/>
+        <SplitHorizontal>1</SplitHorizontal>
+        <TopRowBottomPane>1</TopRowBottomPane>       
+    </WorksheetOptions>
+</Worksheet>
+</Workbook>
+
+</apex:page>

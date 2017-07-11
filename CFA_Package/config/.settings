@@ -1,0 +1,16 @@
+{
+    "projectName": "CFA Package",
+    "username": "vshah@fonteva-int.cfa.org",
+    "id": "9020ef50-666f-11e7-a060-e31345043f6f",
+    "namespace": "CFAMN",
+    "environment": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "workspace": "/Users/snandigam/Documents/workspace",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "StaticResource"
+    ]
+}
